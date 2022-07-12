@@ -108,21 +108,21 @@
   align-items: flex-start;
 }
 
-.toContainer:hover .copyIcon{
-  animation: showClipBoard 0.5s linear forwards;
-}
+/*.toContainer:hover .copyIcon{*/
+/*  animation: showClipBoard 0.5s linear forwards;*/
+/*}*/
 
-.fromContainer:hover .copyIcon{
-  animation: showClipBoard 0.5s linear forwards;
-}
+/*.fromContainer:hover .copyIcon{*/
+/*  animation: showClipBoard 0.5s linear forwards;*/
+/*}*/
 
-.toContainer:hover .clickedIcon{
-  animation: showClipBoard 0.5s linear forwards;
-}
+/*.toContainer:hover .clickedIcon{*/
+/*  animation: showClipBoard 0.5s linear forwards;*/
+/*}*/
 
-.fromContainer:hover .clickedIcon{
-  animation: showClipBoard 0.5s linear forwards;
-}
+/*.fromContainer:hover .clickedIcon{*/
+/*  animation: showClipBoard 0.5s linear forwards;*/
+/*}*/
 
 .inputContainer{
   position: relative;
@@ -130,42 +130,6 @@
   flex-direction: row;
   align-items: center;
   margin-top: 50px;
-}
-
-.copyIcon{
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: 0.5s;
-  opacity: 0;
-  position: absolute;
-  right: -20px
-}
-
-.clickedIcon{
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: 0.5s;
-  opacity: 0;
-  position: absolute;
-  right: -20px;
-  transform: scale(50%);
-}
-
-@keyframes showClipBoard {
-  0%{
-    right: -20px;
-    opacity: 0;
-  }
-  50%{
-    right: 0;
-    opacity: 0.5;
-  }
-  100%{
-    right: 0;
-    opacity: 1;
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

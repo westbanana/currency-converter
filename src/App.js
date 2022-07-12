@@ -2,10 +2,7 @@ import './App.css';
 import React, {useEffect, useRef, useState} from "react";
 import Input from "./components/input";
 import newImage from "./assets/icons/new-arrow.svg";
-import copyIcon from "./assets/icons/copy.svg";
 import Dropdown from "./components/Dropdown";
-import Select from "react-select/base";
-import {CopyToClipboard} from "react-copy-to-clipboard/src";
 
 function App() {
   const [result, setResult] = useState(0);
@@ -13,10 +10,9 @@ function App() {
   const [toSelect, setToSelect] = useState({});
   const [amount, setAmount] = useState('');
   const [currencies, setCurrencies] = useState([]);
-  const [isClicked, setIsClicked] = useState(false);
   const refFirstArrow = useRef(null);
   const refSecondArrow = useRef(null);
-  const refCopy = useRef(null)
+  const refInput = useRef(null);
 
   // TODO: QUERY URL
 
@@ -80,13 +76,15 @@ function App() {
     if (amount) {
       convert(toSelect.value, fromSelect.value, amount, setResult);
     }
-    refFirstArrow.current.classList.remove('first-arrow-rotate')
-    refSecondArrow.current.classList.remove('second-arrow-rotate')
+    refFirstArrow.current.classList.remove('first-arrow-rotate');
+    refSecondArrow.current.classList.remove('second-arrow-rotate');
     setTimeout(() => {
-      refFirstArrow.current.classList.add('first-arrow-rotate')
-      refSecondArrow.current.classList.add('second-arrow-rotate')
+      refFirstArrow.current.classList.add('first-arrow-rotate');
+      refSecondArrow.current.classList.add('second-arrow-rotate');
     }, 0)
   }
+
+  console.log(refInput.current)
 
   return (
     <div className="App">
@@ -113,15 +111,6 @@ function App() {
           />
           <div className="inputContainer">
             <Input  placeholder={0} value={amount} onChange={onChangeAmount} />
-            <button className={`${isClicked ? 'clickedIcon' : 'copyIcon'}`} onClick={() => {
-              navigator.clipboard.writeText(`${amount}`);
-              setIsClicked(true);
-              setTimeout(() => {
-                setIsClicked(false)
-              },300);
-            }}>
-              <img alt='copy-icon' src={copyIcon}/>
-            </button>
           </div>
         </div>
         <div className='arrow-container' onClick={swapCurrency}>
@@ -136,15 +125,6 @@ function App() {
           />
           <div className="inputContainer">
             <Input value={result} onChange={onChangeResult}/>
-            <button  className={`${isClicked ? 'clickedIcon' : 'copyIcon'}`} onClick={() => {
-              navigator.clipboard.writeText(`${result}`);
-              setIsClicked(true);
-              setTimeout(() => {
-                setIsClicked(false)
-              },300);
-            }}>
-              <img alt='copy-icon' src={copyIcon}/>
-            </button>
           </div>
         </div>
       </div>
