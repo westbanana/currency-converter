@@ -1,10 +1,171 @@
 .App {
   text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /*background-color: black;*/
+  /*background: radial-gradient(#387989, #6dd5ed);*/
+  /*background: url("https://wallpaperaccess.com/full/2029165.jpg");*/
+  background-repeat: no-repeat;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.arrow-container{
+  height: 80px;
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  margin-right: 30px;
+}
+
+.first-arrow,
+.second-arrow{
+  width: 51px;
+  height: 41px;
+}
+
+.first-arrow {
+  margin-right: 20px;
+}
+
+.second-arrow{
+  margin-left: 20px;
+  transform: rotate(180deg);
+}
+
+.first-arrow-rotate{
+  animation: first-rotate 0.5s linear forwards;
+}
+
+.second-arrow-rotate{
+  animation: second-rotate 0.5s linear forwards;
+}
+
+
+
+@keyframes first-rotate {
+  0%{
+    transform: translateX(0) translateY(0px);
+  }
+  25%{
+    transform: skew(170deg) translateX(-20px) translateY(0px) rotate(-90deg) scale(1.4);
+  }
+  50%{
+    transform: skew(170deg) translateY(40px) translateX(-20px) rotate(-90deg) scale(1.4);
+  }
+  100%{
+    transform: translateY(40px) translateX(20px) rotate(-180deg);
+  }
+}
+
+@keyframes second-rotate {
+  0%{
+    transform: translateX(0) translateY(0px) rotate(180deg);
+  }
+  25%{
+    transform: skew(170deg) translateX(20px) translateY(0px) rotate(90deg) scale(0.5);
+    filter: blur(3px);
+  }
+  50%{
+    transform: skew(170deg) translateY(-40px) translateX(20px) rotate(90deg) scale(0.5);
+    filter: blur(3px);
+  }
+  100%{
+    transform: translateY(-40px) translateX(-20px) rotate(0deg);
+  }
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 50px;
+  align-items: center;
+  height: 400px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5.5px);
+  -webkit-backdrop-filter: blur(5.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.fromContainer{
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.toContainer{
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.toContainer:hover .copyIcon{
+  animation: showClipBoard 0.5s linear forwards;
+}
+
+.fromContainer:hover .copyIcon{
+  animation: showClipBoard 0.5s linear forwards;
+}
+
+.toContainer:hover .clickedIcon{
+  animation: showClipBoard 0.5s linear forwards;
+}
+
+.fromContainer:hover .clickedIcon{
+  animation: showClipBoard 0.5s linear forwards;
+}
+
+.inputContainer{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.copyIcon{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+  opacity: 0;
+  position: absolute;
+  right: -20px
+}
+
+.clickedIcon{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+  opacity: 0;
+  position: absolute;
+  right: -20px;
+  transform: scale(50%);
+}
+
+@keyframes showClipBoard {
+  0%{
+    right: -20px;
+    opacity: 0;
+  }
+  50%{
+    right: 0;
+    opacity: 0.5;
+  }
+  100%{
+    right: 0;
+    opacity: 1;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,26 +174,126 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.area{
+  background: #6469cc;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  position: absolute;
+  height: 100vh;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
+.circles{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.circles li{
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  animation: animate 25s linear infinite;
+  bottom: -150px;
+
+}
+
+.circles li:nth-child(1){
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+}
+
+
+.circles li:nth-child(2){
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 2s;
+  animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+  animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+  left: 75%;
+  width: 110px;
+  height: 110px;
+  animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 15s;
+  animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+  left: 20%;
+  width: 15px;
+  height: 15px;
+  animation-delay: 2s;
+  animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+  left: 85%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 0s;
+  animation-duration: 11s;
+}
+
+
+
+@keyframes animate {
+
+  0%{
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
   }
-  to {
-    transform: rotate(360deg);
+
+  100%{
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
   }
+
 }

@@ -1,0 +1,60 @@
+.hidden{
+  opacity: 0;
+}
+.container{
+  border-bottom: 1px solid black;
+  .input{
+    outline: none;
+    background-color: transparent;
+    padding-left: 10px;
+    font-size: 44px;
+    max-width: 330px;
+    padding-right: 60px;
+    border: none;
+    text-overflow: ellipsis;
+    color:rgba(0, 0, 0, 0.79);
+    &::placeholder{
+      color: rgba(0, 0, 0, 0.79);
+    }
+  }
+  .borderContainer{
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    opacity: 1;
+    button{
+      transition: 0.5s;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+  }
+  .border{
+    width: 0%;
+    position: absolute;
+    height: 1px;
+    background-color: #ffffff;
+  }
+}
+
+.container:hover .border{
+  transition: 0.3s;
+  animation: input-border 0.5s linear forwards;
+}
+
+@keyframes input-border {
+  from{
+    width: 0%;
+  }
+  to{
+    width: 100%;
+    opacity: 0;
+  }
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
