@@ -108,22 +108,6 @@
   align-items: flex-start;
 }
 
-/*.toContainer:hover .copyIcon{*/
-/*  animation: showClipBoard 0.5s linear forwards;*/
-/*}*/
-
-/*.fromContainer:hover .copyIcon{*/
-/*  animation: showClipBoard 0.5s linear forwards;*/
-/*}*/
-
-/*.toContainer:hover .clickedIcon{*/
-/*  animation: showClipBoard 0.5s linear forwards;*/
-/*}*/
-
-/*.fromContainer:hover .clickedIcon{*/
-/*  animation: showClipBoard 0.5s linear forwards;*/
-/*}*/
-
 .inputContainer{
   position: relative;
   display: flex;

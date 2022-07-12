@@ -4,7 +4,7 @@ import icoOpen from  '../../assets/icons/open-select.svg'
 import {useClickAway} from "react-use";
 
 // TODO: *share url save currency and amount. readme info about project + url heroku, fixed search value initialization and swap value
-const Dropdown = ({ options, value, onChange, }) => {
+const Dropdown = ({ options, value, onChange }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value || {
     value: "",
