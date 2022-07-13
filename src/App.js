@@ -1,16 +1,15 @@
 import './App.css';
-import React, {useEffect, useRef, useState} from "react";
-import {Route, Routes, useSearchParams} from "react-router-dom";
-import MainScreen from "./components/MainScreen";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-function App() {
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<MainScreen/>}/>
-      </Routes>
-    </div>
-  );
-}
+import MainScreen from './screens/MainScreen';
+
+const App = () => (
+  <div>
+    <Routes>
+      <Route path="/" element={<MainScreen />} />
+    </Routes>
+  </div>
+);
 
 export default App;

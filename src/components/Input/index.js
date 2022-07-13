@@ -1,24 +1,21 @@
-import React, { useState, useRef } from 'react';
-import s from './style.module.scss';
-import copyIcon from "../../assets/icons/copy.svg";
-import { ReactComponent as CopyIcon } from "../../assets/icons/copy.svg";
+import React, { useRef } from 'react';
 
-const Input = ({ value, onChange, readonly, isActive }) => {
-  const [isClicked, setIsClicked] = useState(false);
+import { ReactComponent as CopyIcon } from 'assets/icons/copy.svg';
+
+import s from './style.module.scss';
+
+const Input = ({ value, onChange, readonly }) => {
   const refContainer = useRef(null);
   const refIcon = useRef(null);
-
   const onClickCopyButton = () => {
-    setIsClicked(true)
     navigator.clipboard.writeText(`${value}`);
-    refIcon.current.classList.remove(s.icon)
-    refContainer.current.classList.remove(s.clickedCopy)
+    refIcon.current.classList.remove(s.icon);
+    refContainer.current.classList.remove(s.clickedCopy);
     setTimeout(() => {
       refIcon.current.classList.add(s.icon);
       refContainer.current.classList.add(s.clickedCopy);
-      setIsClicked(false)
-    },0);
-  }
+    }, 0);
+  };
 
   return (
     <div className={s.container} ref={refContainer}>
@@ -31,13 +28,12 @@ const Input = ({ value, onChange, readonly, isActive }) => {
           onChange={onChange}
           readOnly={readonly}
         />
-        <button className={s.copyIcon} onClick={onClickCopyButton}>
-          {/*<img alt='copy-icon' src={copyIcon}/>*/}
+        <div role="presentation" className={s.copyIcon} onClick={onClickCopyButton}>
           <CopyIcon ref={refIcon} />
-        </button>
+        </div>
       </div>
       <div className={s.borderContainer}>
-        <div className={s.border}></div>
+        <div className={s.border} />
       </div>
     </div>
   );

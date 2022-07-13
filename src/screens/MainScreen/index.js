@@ -1,10 +1,9 @@
-import React from 'react';
-import {useEffect, useRef, useState} from "react";
-import {useSearchParams} from "react-router-dom";
-import Dropdown from "../Dropdown";
-import Input from "../input";
-import newImage from "../../assets/icons/new-arrow.svg";
-import {value} from "lodash/seq";
+import React, { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import newImage from 'assets/icons/new-arrow.svg';
+import Dropdown from 'components/Dropdown';
+import Input from 'components/Input';
 
 const MainScreen = () => {
   const [result, setResult] = useState(0);
@@ -14,19 +13,15 @@ const MainScreen = () => {
   const [currencies, setCurrencies] = useState([]);
   const refFirstArrow = useRef(null);
   const refSecondArrow = useRef(null);
-  const refInput = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // TODO: QUERY URL
   const convert = (fromCurrency, toCurrency, value, callback) => {
-    if(value){
+    if (value) {
       fetch(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${value}`)
-        .then(response => response.json())
-        .then(response => callback(response.result))
+        .then((response) => response.json())
+        .then((response) => callback(response.result));
     }
-  }
-
-  console.log('amount', typeof(amount));
+  };
 
   const setDefaultCurrencies = (tickers) => {
     if (searchParams.get('from')) {
@@ -34,18 +29,18 @@ const MainScreen = () => {
       if (shit) {
         setFromSelect({
           value: shit.code,
-          label: shit.description
+          label: shit.description,
         });
       } else if (tickers.USD) {
         setFromSelect({
           value: tickers.USD.code,
-          label: tickers.USD.description
+          label: tickers.USD.description,
         });
       }
     } else if (tickers.USD) {
       setFromSelect({
         value: tickers.USD.code,
-        label: tickers.USD.description
+        label: tickers.USD.description,
       });
     }
 
@@ -54,79 +49,76 @@ const MainScreen = () => {
       if (shit) {
         setToSelect({
           value: shit.code,
-          label: shit.description
+          label: shit.description,
         });
       } else if (tickers.UAH) {
         setToSelect({
           value: tickers.UAH.code,
-          label: tickers.UAH.description
+          label: tickers.UAH.description,
         });
       }
     } else if (tickers.UAH) {
       setToSelect({
         value: tickers.UAH.code,
-        label: tickers.UAH.description
+        label: tickers.UAH.description,
       });
     }
 
-    if (searchParams.get('amount')){
-      setAmount(searchParams.get('amount'))
+    if (searchParams.get('amount')) {
+      setAmount(searchParams.get('amount'));
     } else {
-      setAmount(1)
+      setAmount(1);
     }
-  }
+  };
 
   const getCurrencies = () => {
     fetch('https://api.exchangerate.host/symbols')
-      .then(response => response.json())
-      .then(response => {
-        setDefaultCurrencies(response.symbols)
+      .then((response) => response.json())
+      .then((response) => {
+        setDefaultCurrencies(response.symbols);
         setCurrencies(
-          Object.values(response.symbols).map((e) => {
-            return {
-              value: e.code,
-              label: e.description,
-            }
-          })
-        )
-      })
-  }
+          Object.values(response.symbols).map((e) => ({
+            value: e.code,
+            label: e.description,
+          })),
+        );
+      });
+  };
 
   useEffect(() => {
-    if(amount) {
+    if (amount) {
       convert(fromSelect.value, toSelect.value, amount, setResult);
     }
     if (fromSelect && toSelect) {
       setSearchParams({
         from: fromSelect.value,
         to: toSelect.value,
-        amount: amount
+        amount,
       });
     }
-  },[fromSelect, toSelect, amount]);
+  }, [fromSelect, toSelect, amount]);
 
   useEffect(() => {
-    getCurrencies()
-  }, [])
+    getCurrencies();
+  }, []);
 
   const onChangeAmount = (e) => {
     if (e.target.value) {
       convert(fromSelect.value, toSelect.value, e.target.value, setResult);
     } else {
-      setResult('')
+      setResult('');
     }
     setAmount(e.target.value);
-  }
+  };
 
   const onChangeResult = (e) => {
     if (e.target.value) {
       convert(toSelect.value, fromSelect.value, e.target.value, setAmount);
     } else {
-      setAmount('')
+      setAmount('');
     }
     setResult(e.target.value);
-  }
-
+  };
 
   const swapCurrency = () => {
     setFromSelect(toSelect);
@@ -139,48 +131,48 @@ const MainScreen = () => {
     setTimeout(() => {
       refFirstArrow.current.classList.add('first-arrow-rotate');
       refSecondArrow.current.classList.add('second-arrow-rotate');
-    }, 0)
-  }
+    }, 0);
+  };
 
   return (
     <div className="App">
       <div className="area">
         <ul className="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
+          <li />
         </ul>
       </div>
-      <div className='container'>
-        <div className='fromContainer'>
+      <div className="container">
+        <div className="fromContainer">
           <Dropdown
             options={currencies}
             onChange={setFromSelect}
             value={fromSelect}
           />
           <div className="inputContainer">
-            <Input  placeholder={0} value={amount} onChange={onChangeAmount} />
+            <Input placeholder={0} value={amount} onChange={onChangeAmount} />
           </div>
         </div>
-        <div className='arrow-container' onClick={swapCurrency}>
-          <img alt='arrow' ref={refFirstArrow} src={newImage} className='first-arrow' />
-          <img alt='arrow' ref={refSecondArrow} src={newImage} className='second-arrow' />
+        <div role="presentation" className="arrow-container" onClick={swapCurrency}>
+          <img alt="arrow" ref={refFirstArrow} src={newImage} className="first-arrow" />
+          <img alt="arrow" ref={refSecondArrow} src={newImage} className="second-arrow" />
         </div>
-        <div className='toContainer'>
+        <div className="toContainer">
           <Dropdown
             options={currencies}
             onChange={setToSelect}
             value={toSelect}
           />
           <div className="inputContainer">
-            <Input value={result} onChange={onChangeResult}/>
+            <Input value={result} onChange={onChangeResult} />
           </div>
         </div>
       </div>

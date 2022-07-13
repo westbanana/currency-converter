@@ -259,6 +259,9 @@
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
   }
+  .arrow-container{
+    transform: rotate(90deg);
+  }
 }
 
 @media (max-height: 700px) {
