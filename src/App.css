@@ -125,8 +125,7 @@
 
 
 .area{
-  background: #6469cc;
-  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  background: #F9F3EE;
   position: absolute;
   height: 100vh;
   width: 100%;
@@ -147,7 +146,7 @@
   list-style: none;
   width: 20px;
   height: 20px;
-  background: rgba(255, 255, 255, 0.2);
+  background: #F9CEEE;
   animation: animate 25s linear infinite;
   bottom: -150px;
 
@@ -271,11 +270,9 @@
     margin-top: 25px;
   }
 
-  .first-arrow,
-  .second-arrow{
-  }
 
   .first-arrow{
+    transform: translateX(14px);
   }
 
   .first-arrow-rotate{

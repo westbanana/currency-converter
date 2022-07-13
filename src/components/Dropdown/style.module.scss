@@ -57,7 +57,7 @@
   .selectMenu{
     overflow: auto;
     width: 100%;
-    background-color: #969bfa;
+    background-color: #FFFEFC;
     border-radius: 5px;
     animation: open 0.3s linear forwards;
     border: rgba(0, 0, 0, 0.41) 1px solid;
@@ -70,10 +70,10 @@
       width: 5px;
     }
     &::-webkit-scrollbar-track{
-      background: #8f95ef;
+      background: #a7aaae;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: #606aff;
+      background-color: #484848;
       border-radius: 10px;
       margin: 0 2px;
     }
@@ -83,7 +83,7 @@
       }
       color: rgba(0, 0, 0, 0.65);
       &:nth-of-type(odd){
-        background-color: #8F94FBFF;
+        background-color: #EEF3F9;
       }
       overflow: hidden;
       gap: 20px;
