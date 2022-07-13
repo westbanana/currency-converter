@@ -1,16 +1,20 @@
 import React, { useState, useRef } from 'react';
 import s from './style.module.scss';
 import copyIcon from "../../assets/icons/copy.svg";
+import { ReactComponent as CopyIcon } from "../../assets/icons/copy.svg";
 
 const Input = ({ value, onChange, readonly, isActive }) => {
   const [isClicked, setIsClicked] = useState(false);
   const refContainer = useRef(null);
+  const refIcon = useRef(null);
 
   const onClickCopyButton = () => {
     setIsClicked(true)
     navigator.clipboard.writeText(`${value}`);
+    refIcon.current.classList.remove(s.icon)
     refContainer.current.classList.remove(s.clickedCopy)
     setTimeout(() => {
+      refIcon.current.classList.add(s.icon);
       refContainer.current.classList.add(s.clickedCopy);
       setIsClicked(false)
     },0);
@@ -28,7 +32,8 @@ const Input = ({ value, onChange, readonly, isActive }) => {
           readOnly={readonly}
         />
         <button className={s.copyIcon} onClick={onClickCopyButton}>
-          <img alt='copy-icon' src={copyIcon}/>
+          {/*<img alt='copy-icon' src={copyIcon}/>*/}
+          <CopyIcon ref={refIcon} />
         </button>
       </div>
       <div className={s.borderContainer}>

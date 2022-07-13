@@ -8,9 +8,6 @@
     background-color: transparent;
     padding-left: 10px;
     font-size: 30px;
-    //font-size: 44px;
-    //max-width: 330px;
-    //max-width: 330px;
     width: 100%;
     height: 50%;
     padding-right: 60px;
@@ -38,10 +35,34 @@
     }
   }
   .border{
-    width: 0%;
+    width: 0;
     height: 1px;
     background-color: #ffffff;
-    right: 0%;
+    right: 0;
+  }
+}
+
+.icon{
+  animation: swapIconColor 0.5s linear forwards;
+}
+
+@keyframes swapIconColor{
+  0%{
+    stroke: black;
+    opacity: 1;
+  }
+  25%{
+    stroke: white;
+    opacity: 1;
+  }
+  50%{
+    stroke: white;
+    opacity: 1;
+
+  }
+  100%{
+    opacity: 1;
+    stroke: black;
   }
 }
 
@@ -52,7 +73,8 @@
   transition: 0.5s;
   opacity: 0;
   position: absolute;
-  right: -20px
+  right: -20px;
+  margin-bottom: 10px;
 }
 
 .container:hover .copyIcon {
@@ -64,9 +86,9 @@
   align-items: center;
 }
 
-.clickedCopy{
-  animation: swapColor 0.7s linear forwards;
-}
+//.clickedCopy{
+//  animation: swapColor 0.7s linear forwards;
+//}
 
 .container:hover .border{
   transition: 0.3s;
@@ -115,4 +137,8 @@
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+@media (max-width: 1024) {
+  
 }
