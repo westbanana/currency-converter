@@ -52,11 +52,11 @@
     opacity: 1;
   }
   25%{
-    stroke: white;
+    stroke: #fc66ce;
     opacity: 1;
   }
   50%{
-    stroke: white;
+    stroke: #fc66ce;
     opacity: 1;
 
   }
@@ -86,16 +86,6 @@
   align-items: center;
 }
 
-//.clickedCopy{
-//  animation: swapColor 0.7s linear forwards;
-//}
-
-.container:hover .border{
-  transition: 0.3s;
-  animation: input-border 0.5s linear forwards;
-}
-
-
 @keyframes swapColor {
   0%{
     border-bottom: 1px black solid;
@@ -123,22 +113,8 @@
   }
 }
 
-@keyframes input-border {
-  from{
-    width: 0%;
-  }
-  to{
-    width: 100%;
-    opacity: 0;
-  }
-
-}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
-}
-
-@media (max-width: 1024) {
-  
 }
