@@ -4,6 +4,7 @@ import {useSearchParams} from "react-router-dom";
 import Dropdown from "../Dropdown";
 import Input from "../input";
 import newImage from "../../assets/icons/new-arrow.svg";
+import {value} from "lodash/seq";
 
 const MainScreen = () => {
   const [result, setResult] = useState(0);
@@ -14,38 +15,80 @@ const MainScreen = () => {
   const refFirstArrow = useRef(null);
   const refSecondArrow = useRef(null);
   const refInput = useRef(null);
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   // TODO: QUERY URL
   const convert = (fromCurrency, toCurrency, value, callback) => {
-    fetch(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${value}`)
-      .then(response => response.json())
-      .then(response => callback(response.result))
+    if(value){
+      fetch(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${value}`)
+        .then(response => response.json())
+        .then(response => callback(response.result))
+    }
+  }
+
+  console.log('amount', typeof(amount));
+
+  const setDefaultCurrencies = (tickers) => {
+    if (searchParams.get('from')) {
+      const shit = tickers[searchParams.get('from')];
+      if (shit) {
+        setFromSelect({
+          value: shit.code,
+          label: shit.description
+        });
+      } else if (tickers.USD) {
+        setFromSelect({
+          value: tickers.USD.code,
+          label: tickers.USD.description
+        });
+      }
+    } else if (tickers.USD) {
+      setFromSelect({
+        value: tickers.USD.code,
+        label: tickers.USD.description
+      });
+    }
+
+    if (searchParams.get('to')) {
+      const shit = tickers[searchParams.get('to')];
+      if (shit) {
+        setToSelect({
+          value: shit.code,
+          label: shit.description
+        });
+      } else if (tickers.UAH) {
+        setToSelect({
+          value: tickers.UAH.code,
+          label: tickers.UAH.description
+        });
+      }
+    } else if (tickers.UAH) {
+      setToSelect({
+        value: tickers.UAH.code,
+        label: tickers.UAH.description
+      });
+    }
+
+    if (searchParams.get('amount')){
+      setAmount(searchParams.get('amount'))
+    } else {
+      setAmount(1)
+    }
   }
 
   const getCurrencies = () => {
     fetch('https://api.exchangerate.host/symbols')
       .then(response => response.json())
       .then(response => {
-        setCurrencies(Object.values(response.symbols).map((e) => {
-          if (e.code === 'USD') {
-            setFromSelect({
+        setDefaultCurrencies(response.symbols)
+        setCurrencies(
+          Object.values(response.symbols).map((e) => {
+            return {
               value: e.code,
               label: e.description,
-            })
-          }
-          if (e.code === 'UAH') {
-            setToSelect({
-              value: e.code,
-              label: e.description,
-            })
-          }
-          return {
-            value: e.code,
-            label: e.description,
-          }
-        }))
+            }
+          })
+        )
       })
   }
 
@@ -56,17 +99,14 @@ const MainScreen = () => {
     if (fromSelect && toSelect) {
       setSearchParams({
         from: fromSelect.value,
-        to: toSelect.value
+        to: toSelect.value,
+        amount: amount
       });
     }
-  },[fromSelect, toSelect])
+  },[fromSelect, toSelect, amount]);
 
   useEffect(() => {
     getCurrencies()
-    if(searchParams.get('from') && searchParams.get('to')){
-      setFromSelect(currencies[searchParams.get('from')])
-      setToSelect(currencies[searchParams.get('to')])
-    }
   }, [])
 
   const onChangeAmount = (e) => {
