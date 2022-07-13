@@ -45,6 +45,20 @@
 
 
 
+/*@keyframes first-rotate {*/
+/*  0%{*/
+/*    transform: translateX(0) translateY(0px);*/
+/*  }*/
+/*  25%{*/
+/*    transform: skew(170deg) translateX(-20px) translateY(0px) rotate(-90deg) scale(1.4);*/
+/*  }*/
+/*  50%{*/
+/*    transform: skew(170deg) translateY(40px) translateX(-20px) rotate(-90deg) scale(1.4);*/
+/*  }*/
+/*  100%{*/
+/*    transform: translateY(40px) translateX(20px) rotate(-180deg);*/
+/*  }*/
+/*}*/
 @keyframes first-rotate {
   0%{
     transform: translateX(0) translateY(0px);
