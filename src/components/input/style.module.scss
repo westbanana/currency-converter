@@ -1,11 +1,17 @@
 .container{
+  display: flex;
   border-bottom: 1px solid black;
+  width: 100%;
+  align-items: flex-end;
   .input{
     outline: none;
     background-color: transparent;
     padding-left: 10px;
-    font-size: 44px;
-    max-width: 330px;
+    font-size: 30px;
+    //font-size: 44px;
+    //max-width: 330px;
+    //max-width: 330px;
+    width: 100%;
     padding-right: 60px;
     border: none;
     text-overflow: ellipsis;
@@ -19,6 +25,10 @@
     display: flex;
     justify-content: center;
     opacity: 1;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    align-items: flex-end;
     button{
       transition: 0.5s;
       background-color: transparent;
@@ -28,9 +38,9 @@
   }
   .border{
     width: 0%;
-    position: absolute;
     height: 1px;
     background-color: #ffffff;
+    right: 0%;
   }
 }
 
@@ -105,4 +115,3 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
-

@@ -7,12 +7,14 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    max-width: 100%;
     &:hover .input{
       color: white;
     }
     .input{
       transition: 0.3s;
-      max-width: 330px;
+      //max-width: 330px;
+      width: 100%;
       outline: none;
       border-radius: 5px;
       cursor: text;
@@ -31,9 +33,9 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-around;
-      position: relative;
+      position: absolute;
       height: 35px;
-      right: 36px;
+      right: 0px;
       width: 35px;
       cursor: pointer;
       border-left: rgba(0, 0, 0, 0.79) 1px solid;
@@ -53,14 +55,11 @@
   }
   .selectMenu{
     overflow: auto;
-    min-width: 330px;
-    max-width: 330px;
-    max-height: 300px;
+    width: 100%;
     background-color: #969bfa;
     border-radius: 5px;
     animation: open 0.3s linear forwards;
     border: rgba(0, 0, 0, 0.41) 1px solid;
-    //overflow: auto;
     position: absolute;
     top: 100%;
     z-index: 9999;
@@ -146,5 +145,29 @@
   }
   to{
     max-height: 300px;
+  }
+}
+
+@media (max-width: 768px){
+  .selectMenu{
+    height: 400%;
+  }
+}
+
+@media (max-height: 560px) {
+  .selectMenu {
+    height: 500%;
+  }
+}
+
+@media (max-height: 515px) {
+  .selectMenu {
+    height: 400%;
+  }
+}
+
+@media (max-height: 400px) {
+  .selectMenu {
+    height: 300%;
   }
 }

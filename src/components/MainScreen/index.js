@@ -17,11 +17,7 @@ const MainScreen = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  console.log(fromSelect);
-  console.log(toSelect)
-
   // TODO: QUERY URL
-
   const convert = (fromCurrency, toCurrency, value, callback) => {
     fetch(`https://api.exchangerate.host/convert?from=${fromCurrency}&to=${toCurrency}&amount=${value}`)
       .then(response => response.json())
