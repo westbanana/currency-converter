@@ -1,23 +1,24 @@
-import React, {useEffect, useRef, useState} from 'react';
-import s from './style.module.scss';
-import icoOpen from  '../../assets/icons/open-select.svg'
-import {useClickAway} from "react-use";
+import React, { useEffect, useRef, useState } from 'react';
+import { useClickAway } from 'react-use';
 
-// TODO: *share url save currency and amount. readme info about project + url heroku, fixed search value initialization and swap value
+import icoOpen from 'assets/icons/open-select.svg';
+
+import s from './style.module.scss';
+
 const Dropdown = ({ options, value, onChange }) => {
   const [expanded, setExpanded] = useState(false);
   const [selectedOption, setSelectedOption] = useState(value || {
-    value: "",
-    label: ""
+    value: '',
+    label: '',
   });
   const [dropdownOptions, setDropdownOptions] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const ref = useRef(null);
 
   useClickAway(ref, () => {
-    if(expanded){
-      if(searchValue !== selectedOption.value){
-        setSearchValue(selectedOption.value)
+    if (expanded) {
+      if (searchValue !== selectedOption.value) {
+        setSearchValue(selectedOption.value);
       }
       setExpanded(false);
     }
@@ -25,49 +26,47 @@ const Dropdown = ({ options, value, onChange }) => {
 
   useEffect(() => {
     if (options.length) {
-      setDropdownOptions(options)
+      setDropdownOptions(options);
     }
-  }, [options])
+  }, [options]);
 
   useEffect(() => {
     if (value) {
       setSelectedOption(value);
     }
-  }, [value])
+  }, [value]);
 
   useEffect(() => {
     if (selectedOption) {
-      setSearchValue(selectedOption.value)
+      setSearchValue(selectedOption.value);
     }
-  },[selectedOption])
+  }, [selectedOption]);
 
   const onClickOption = (item) => {
-    setSelectedOption(item)
+    setSelectedOption(item);
     onChange(item);
     setSearchValue(item.value);
-    setExpanded(false)
-  }
+    setExpanded(false);
+  };
 
   const onClickInput = () => {
-    setExpanded(true)
-  }
+    setExpanded(true);
+  };
 
   const onChangeInput = (e) => {
-    setSearchValue(e.target.value)
-    const filteredOptions = options.filter((item) => {
-      if (item.value.toLowerCase().includes(e.target.value.toLowerCase()) || item.label.toLowerCase().includes(e.target.value.toLowerCase())) {
-        return item
-      }
-    });
+    setSearchValue(e.target.value);
+    const filteredOptions = options.filter((item) => item.value.toLowerCase().includes(e.target.value.toLowerCase())
+      || item.label.toLowerCase().includes(e.target.value.toLowerCase()));
     setDropdownOptions(filteredOptions);
-  }
+  };
 
   return (
     <div className={s.container} ref={ref}>
       <div className={s.inputContainer}>
         <input value={searchValue} className={s.input} onChange={onChangeInput} onClick={() => onClickInput()} />
-        <div className={s.arrowContainer} onClick={ () => setExpanded(!expanded)}>
+        <div role="presentation" className={s.arrowContainer} onClick={() => setExpanded(!expanded)}>
           <img
+            alt="icon"
             src={icoOpen}
             className={`${expanded ? s.open : s.close}`}
           />
@@ -77,12 +76,12 @@ const Dropdown = ({ options, value, onChange }) => {
         <div className={s.selectMenu}>
           {dropdownOptions.length ? (
             dropdownOptions.map((item) => (
-                <div key={item.value} className={s.currency} onClick={() => onClickOption(item)}>
-                  <span className={s.value}>{item.value}</span>
-                  <span className={s.label}>{item.label}</span>
-                </div>
+              <div role="presentation" key={item.value} className={s.currency} onClick={() => onClickOption(item)}>
+                <span className={s.value}>{item.value}</span>
+                <span className={s.label}>{item.label}</span>
+              </div>
             ))
-          ): (
+          ) : (
             <div className={s.noOptions}>
               <span className={s.noOptionsDescription}>No options</span>
             </div>
