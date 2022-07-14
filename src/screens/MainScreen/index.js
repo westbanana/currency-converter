@@ -25,11 +25,11 @@ const MainScreen = () => {
 
   const setDefaultCurrencies = (tickers) => {
     if (searchParams.get('from')) {
-      const shit = tickers[searchParams.get('from')];
-      if (shit) {
+      const fromTicker = tickers[searchParams.get('from')];
+      if (fromTicker) {
         setFromSelect({
-          value: shit.code,
-          label: shit.description,
+          value: fromTicker.code,
+          label: fromTicker.description,
         });
       } else if (tickers.USD) {
         setFromSelect({
@@ -45,11 +45,11 @@ const MainScreen = () => {
     }
 
     if (searchParams.get('to')) {
-      const shit = tickers[searchParams.get('to')];
+      const toTicker = tickers[searchParams.get('to')];
       if (shit) {
         setToSelect({
-          value: shit.code,
-          label: shit.description,
+          value: toTicker.code,
+          label: toTicker.description,
         });
       } else if (tickers.UAH) {
         setToSelect({
